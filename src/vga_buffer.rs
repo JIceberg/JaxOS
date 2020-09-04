@@ -164,3 +164,21 @@ pub fn _print(args: fmt::Arguments) {
     use core::fmt::Write;
     WRITER.lock().write_fmt(args).unwrap();
 }
+
+/// Some test cases
+#[test_case]
+fn vga_println_many_test() {
+    for _ in 0..200 {
+        println!("Hello, world!");
+    }
+}
+
+#[test_case]
+fn vga_println_output_test() {
+    let s = "Hello, world!";
+    println!("{}", s);
+    for (i, c) in s.chars().enumerate() {
+        let screen_char = WRITER.lock().buffer.chars[BUFFER_HEIGHT - 2][i].read();
+        assert_eq!(char::from(screen_char.ascii_char), c);
+    }
+}
