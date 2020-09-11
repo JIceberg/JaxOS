@@ -1,5 +1,5 @@
 [package]
-name = "rust_os"
+name = "jax_os"
 version = "1.0.0"
 authors = ["Jackson Isenberg <jisenberg1050@gmail.com>"]
 edition = "2018"
@@ -19,6 +19,7 @@ version = "1.4.0"
 features = ["spin_no_std"]
 
 [package.metadata.bootimage]
+run-command = ["qemu-system-x86_64", "-drive", "format=raw,file={}"]
 test-args = [
     "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04",
     "-serial", "stdio",
