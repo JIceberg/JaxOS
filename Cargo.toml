@@ -1,5 +1,5 @@
 [package]
-name = "rust_os"
+name = "jax_os"
 version = "1.0.0"
 authors = ["Jackson Isenberg <jisenberg1050@gmail.com>"]
 edition = "2018"
@@ -11,7 +11,7 @@ bootloader = { version = "0.9.8", features = ["map_physical_memory"]}
 rlibc = "1.0.0"
 volatile = "0.3.0"
 spin = "0.5.2"
-x86_64 = "0.11.5"
+x86_64 = "0.11.7"
 uart_16550 = "0.2.7"
 
 [dependencies.lazy_static]
@@ -19,6 +19,7 @@ version = "1.4.0"
 features = ["spin_no_std"]
 
 [package.metadata.bootimage]
+run-command = ["qemu-system-x86_64", "-drive", "format=raw,file={}"]
 test-args = [
     "-device", "isa-debug-exit,iobase=0xf4,iosize=0x04",
     "-serial", "stdio",
@@ -26,3 +27,11 @@ test-args = [
 ]
 test-success-exit-code = 33         # (0x10 << 1) | 1
 test-timeout = 15                   # in seconds
+
+[[test]]
+name = "divide_by_zero"
+harness = false
+
+[[test]]
+name = "basic_panic"
+harness = false
