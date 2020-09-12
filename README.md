@@ -1,5 +1,8 @@
 # JaxOS, v0.0.0&emsp;![Rust](https://github.com/JIceberg/rust-os/workflows/Rust/badge.svg)
 
+<img src=".github/images/JaxOS-logo.png" width="100px"/>
+<br><br />
+
 *Created by Jackson Isenberg*
 
 A kernel built from Rust for a small operating system.
@@ -20,12 +23,12 @@ The reason for using Rust is simple: it's like C but better (except in processin
 Upon start-up, a computer executes firmware code in the ROM. This code performs a test, detects available RAM, and pre-initializes the CPU and hardware for the boot. It then looks for a bootable disk to boot the OS kernel.
 
 The JaxOS kernel needs to be turned into a bootable disk image, so it needs to be linked to a bootloader. Instead of creating our own bootloader, which would be a pain, we can just use the bootloader crate. We can run this disk image in the QEMU virtual machine by adding the following lines to our kernel's Cargo.toml (this is information taken from the README of the [bootimage repository](https://github.com/rust-osdev/bootimage)):
-```rs
+```rust
 [package.metadata.bootimage]
 run-command = ["qemu-system-x86_64", "-drive", "format=raw,file={}"]
 ```
 Then, in our config.toml file under the .cargo folder, we write:
-```rs
+```rust
 [target.'cfg(target_os = "none")']
 runner = "bootimage runner"
 ```
@@ -56,7 +59,7 @@ We can separate tests from regular functions with the `#[cfg(test)]` attribute b
 ### Creating a Library
 
 The [src/lib.rs](src/lib.rs) file contains the definitions for these integration tests. From this we can always call the specified implementation of panic handling and test running (seen in the test_runner and test_panic functions) through the attribute calls below:
-```rs
+```rust
 #![feature(custom_test_frameworks)]
 #![test_runner(jax_os::test_runner)]
 #![reexport_test_harness_main = "test_main"]
