@@ -93,25 +93,6 @@ jobs:
         with:
           command: test
 
-  check_formatting:
-    name: Check Formatting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Install Rust Toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: nightly
-          components: rustfmt
-          override: true
-      - name: Run `cargo fmt`
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
-
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
