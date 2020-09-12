@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ master ]
 
-env:
-  CARGO_TERM_COLOR: always
-
 jobs:
   check:
     name: Check
@@ -20,6 +17,13 @@ jobs:
           macos-latest,
           windows-latest
         ]
+        include:
+        - platform: macos-latest
+          TARGET: x86_64-apple-darwin
+        - platform: windows-latest
+          TARGET: x86_64-pc-windows-msvc
+        - platform: ubuntu_latest
+          TARGET: x86_64-unknown-linux-musl
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout Repository
@@ -28,7 +32,7 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
-          toolchain: nightly-x86-64
+          toolchain: nightly
           override: true
       - name: Install `rust-src` Rustup Component
         run: rustup component add rust-src
@@ -47,6 +51,13 @@ jobs:
           macos-latest,
           windows-latest
         ]
+        include:
+        - platform: macos-latest
+          TARGET: x86_64-apple-darwin
+        - platform: windows-latest
+          TARGET: x86_64-pc-windows-msvc
+        - platform: ubuntu_latest
+          TARGET: x86_64-unknown-linux-musl
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Install Rust Toolchain
