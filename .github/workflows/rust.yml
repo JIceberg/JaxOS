@@ -6,11 +6,15 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
   check:
     name: Check
     strategy:
-**fail-fast: false** matrix:
+      fail-fast: false
+      matrix:
         platform: [
           ubuntu-latest,
           macos-latest,
@@ -35,7 +39,8 @@ jobs:
   test:
     name: Test
     strategy:
-**fail-fast: false** matrix:
+      fail-fast: false
+      matrix:
         platform: [
           ubuntu-latest,
           macos-latest,
