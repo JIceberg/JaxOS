@@ -1,6 +1,7 @@
+# JaxOS, v0.0.0&emsp;![Rust](https://github.com/JIceberg/rust-os/workflows/Rust/badge.svg)
+
 <img src=".github/images/JaxOS-logo.png" width="100px">
 
-# JaxOS, v0.0.0&emsp;![Rust](https://github.com/JIceberg/rust-os/workflows/Rust/badge.svg)
 *Created by Jackson Isenberg*
 
 A kernel built from Rust for a small operating system.
