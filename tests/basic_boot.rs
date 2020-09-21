@@ -45,5 +45,5 @@ fn hash_assertion() {
 #[test_case]
 fn simple_equals() {
     assert_eq!(0, 0);
-    assert_neq!(0, 1);
+    assert_ne!(0, 1);
 }
