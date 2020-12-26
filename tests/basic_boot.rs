@@ -41,3 +41,9 @@ fn hash_assertion() {
     let y = x;
     assert_eq!(x, y, "{}'s hash did not match {}", y, x);
 }
+
+#[test_case]
+fn simple_equals() {
+    assert_eq!(0, 0);
+    assert_ne!(0, 1);
+}
